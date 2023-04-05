@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Body, Request, Response, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from typing import List
+import datetime
 
 from models import Sensor, SensorValue
 
@@ -42,5 +43,5 @@ def get_latest_val(id: str, request: Request):
         if (sensor_val := request.app.database["solasis"]["sensor_values"].find({"sensor_id": id}).sort("timestamp",-1).limit(1)) is not None:
             return sensor_val[0]
     except IndexError:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Sensor with ID {id} not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Sensor with ID {id} has no values")
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Sensor with ID {id} not found")

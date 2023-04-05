@@ -1,10 +1,5 @@
-import time
-from typing import List
-
 from fastapi import Depends, FastAPI, HTTPException, UploadFile, File, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
 import os
 from pymongo import MongoClient
 from routes import router as sensor_router

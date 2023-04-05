@@ -14,4 +14,4 @@ class SensorValue(BaseModel):
     id: str = Field(default_factory=uuid.uuid4, alias="_id")
     sensor_id: str = Field(default_factory=uuid.uuid4)
     value: float = FiniteFloat()
-    timestamp: datetime.datetime = datetime.datetime.now()
+    timestamp: datetime.datetime = Field(default_factory=datetime.datetime.now)
